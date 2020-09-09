@@ -91,7 +91,7 @@ namespace AsmdefHelper.Editor
         public static void EnsurePlayModeTestAsmdef(string path, string name)
         {
             EnsureRootAsmdef(path, name);
-            var pathFolder = $"{path}/Tests/PlayMode/";
+            var pathFolder = $"{path}/Tests/Runtime/";
             EnsureDirectory(pathFolder);
 
             var files = GetAsmdefFiles(pathFolder);
@@ -102,7 +102,7 @@ namespace AsmdefHelper.Editor
 
             CreateAsmdefFile(pathFolder, new AsmdefFile()
             {
-                name = $"{name}.Tests.PlayMode",
+                name = $"{name}.Tests.Runtime",
                 includePlatforms = new[] {"Editor"},
                 references = new[] {name},
             });
@@ -128,7 +128,7 @@ namespace AsmdefHelper.Editor
         public static void EnsureEditModeTestAsmdef(string path, string name)
         {
             EnsureRootAsmdef(path, name);
-            var pathFolder = $"{path}/Tests/EditMode/";
+            var pathFolder = $"{path}/Tests/Editor/";
             EnsureDirectory(pathFolder);
 
             var files = GetAsmdefFiles(pathFolder);
@@ -139,7 +139,7 @@ namespace AsmdefHelper.Editor
 
             CreateAsmdefFile(pathFolder, new AsmdefFile()
             {
-                name = $"{name}.Tests.EditMode",
+                name = $"{name}.Tests.Editor",
                 includePlatforms = new[] {"Editor"},
                 references = new[]
                 {
