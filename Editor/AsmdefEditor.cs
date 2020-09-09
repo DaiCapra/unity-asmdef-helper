@@ -45,6 +45,7 @@ namespace AsmdefHelper.Editor
 
         private static void Refresh()
         {
+            // Ignore irrelevant error messages
             try
             {
                 AssetDatabase.Refresh();
