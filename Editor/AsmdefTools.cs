@@ -40,6 +40,23 @@ namespace AsmdefHelper.Editor
             }
         }
 
+        private static void EnsureDirectory(string path)
+        {
+            if (Directory.Exists(path))
+            {
+                return;
+            }
+
+            try
+            {
+                Directory.CreateDirectory(path);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
+        }
+
         public static void CreateAsmdefFile(string path, AsmdefFile file)
         {
             var json = JsonUtility.ToJson(file, true);
@@ -103,27 +120,19 @@ namespace AsmdefHelper.Editor
             CreateAsmdefFile(pathFolder, new AsmdefFile()
             {
                 name = $"{name}.Tests.Runtime",
-                includePlatforms = new[] {"Editor"},
-                references = new[] {name},
+                references = new[]
+                {
+                    "UnityEngine.TestRunner",
+                    "UnityEditor.TestRunner",
+                    name
+                },
+                precompiledReferences = new[] {"nunit.framework.dll"},
+                overrideReferences = true,
+                autoReferenced = false,
+                defineConstraints = new[] {"UNITY_INCLUDE_TESTS"}
             });
         }
 
-        private static void EnsureDirectory(string path)
-        {
-            if (Directory.Exists(path))
-            {
-                return;
-            }
-
-            try
-            {
-                Directory.CreateDirectory(path);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-            }
-        }
 
         public static void EnsureEditModeTestAsmdef(string path, string name)
         {
@@ -150,7 +159,7 @@ namespace AsmdefHelper.Editor
                 precompiledReferences = new[] {"nunit.framework.dll"},
                 overrideReferences = true,
                 autoReferenced = false,
-                defineConstraints = new []{"UNITY_INCLUDE_TESTS"}
+                defineConstraints = new[] {"UNITY_INCLUDE_TESTS"}
             });
         }
     }
