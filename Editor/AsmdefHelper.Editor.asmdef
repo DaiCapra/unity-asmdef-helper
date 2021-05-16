@@ -1,8 +1,7 @@
 {
     "name": "AsmdefHelper.Editor",
-    "references": [
-        "AsmdefHelper"
-    ],
+    "rootNamespace": "",
+    "references": [],
     "includePlatforms": [
         "Editor"
     ],
